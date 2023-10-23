@@ -4,12 +4,13 @@
   </head>
   <body>
     <h1>Mon super site de gossip, depuis le dossier views !</h1>
-    <p>la liste de potin arrive en attendant viens crée un nouveau potin </p>
-    <a href="/gossips/new/">Crée un nouveau potin</a>
+    <p>La liste de potins arrive, en attendant, viens créer un nouveau potin.</p>
+    <a href="/gossips/new/">Créer un nouveau potin</a>
     <% gossips.each do |gossip| %>
       <p>
-        Auteur : <%= gossip.author %>
+        Auteur : <%= gossip.author %><br>
         Potin : <%= gossip.content %>
+        <a href="/gossips/<%= gossip.id %>">Voir le potin <%= gossip.id %></a>
       </p>
     <% end %>
   </body>

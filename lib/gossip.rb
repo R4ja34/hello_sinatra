@@ -3,11 +3,16 @@ require 'csv'
 
 # Classe Gossip (le modèle)
 class Gossip
-  attr_accessor :author, :content
-
+  attr_accessor :author, :content, :id
+  @@count_id = 0
+  @@instances = []
+  
   def initialize(author, content)
+    @@count_id += 1
+    @id = @@count_id
     @author = author
     @content = content
+    @@instances << self
   end
 
   # Méthode pour enregistrer le gossip dans un fichier CSV
@@ -18,12 +23,13 @@ class Gossip
   end
 
   def self.all
-    all_gossips = [] # Crée un tableau vide pour stocker les potins
-    CSV.foreach('./db/gossips.csv') do |row|
-      author, content = row # Démontage de chaque ligne du CSV
-      gossip_provisoire = Gossip.new(author, content) # Crée un objet Gossip pour chaque ligne
-      all_gossips << gossip_provisoire # Ajoute l'objet au tableau
-    end
-    all_gossips
+
+    return @@instances
+  end
+
+  def self.find(id)
+    all_gossips = Gossip.all
+    return all_gossips[(id.to_i-1)] if (id.to_i-1).between?(0, all_gossips.length - 1)
   end
 end
+
