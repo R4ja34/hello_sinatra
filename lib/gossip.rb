@@ -23,7 +23,6 @@ class Gossip
   end
 
   def self.all
-
     return @@instances
   end
 

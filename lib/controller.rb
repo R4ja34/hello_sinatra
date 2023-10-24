@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/gossips/new/' do
-    author = params['gossip_author']
+    author = params['gossip_author'] #payload ???????
     content = params['gossip_content']
     gossip = Gossip.new(author, content)
     gossip.save
@@ -28,7 +28,7 @@ class ApplicationController < Sinatra::Base
   end
 
   
-  get '/gossips/:id' do
+  get '/gossips/:id' do #uri ????
     id = params['id']
     gossip = Gossip.find(id)
   
